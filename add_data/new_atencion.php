@@ -145,6 +145,7 @@ $conn->close();
                                                 xhr.open('GET', '../processes/buscar_paciente.php?dni=' + dni, true);
 
                                                 xhr.onload = function() {
+                                                    console.log('STATUS', xhr.status, 'RESPUESTA', xhr.responseText); // debug en hosting
                                                     if (xhr.status === 200) {
                                                         const result = JSON.parse(xhr.responseText);
 

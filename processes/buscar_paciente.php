@@ -1,43 +1,59 @@
 <?php
-include '../services/conexion.php'; // Asegúrate de que la conexión a la base de datos esté correcta
+header('Content-Type: application/json; charset=utf-8');
+
+include '../services/conexion.php'; // Debe crear $conn = new mysqli(...)
 
 // Verificar si el parámetro 'dni' se ha enviado
-if (isset($_GET['dni'])) {
-    $dni = $_GET['dni'];
-
-    // Validar que el DNI es un número válido
-    if (!preg_match('/^\d{8}$/', $dni)) {
-        echo json_encode(['success' => false, 'message' => 'DNI no válido']);
-        exit;
-    }
-
-    // Preparar la consulta para buscar al paciente
-    $query = "SELECT * FROM pacientes WHERE dni = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $dni); // 's' significa que estamos pasando una cadena (string)
-
-    // Ejecutar la consulta
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Verificar si encontramos el paciente
-    if ($result->num_rows > 0) {
-        // Si se encuentra el paciente, devolver los datos en formato JSON
-        $patient = $result->fetch_assoc();
-        echo json_encode([
-            'success' => true,
-            'id' => $patient['id'],
-            'nombres' => $patient['nombres'],
-            'apellido_paterno' => $patient['apellido_paterno'],
-            'apellido_materno' => $patient['apellido_materno'],
-            'programa_estudios' => $patient['programa_estudios']
-        ]);
-    } else {
-        // Si no se encuentra el paciente
-        echo json_encode(['success' => false, 'message' => 'Paciente no encontrado']);
-    }
-    $stmt->close();
-} else {
+if (!isset($_GET['dni'])) {
     echo json_encode(['success' => false, 'message' => 'DNI no proporcionado']);
+    exit;
 }
-?>
+
+$dni = $_GET['dni'];
+
+// Validar que el DNI es un número válido
+if (!preg_match('/^\d{8}$/', $dni)) {
+    echo json_encode(['success' => false, 'message' => 'DNI no válido']);
+    exit;
+}
+
+// Selecciona columnas explícitas y en orden fijo
+$sql = "SELECT id, nombres, apellido_paterno, apellido_materno, programa_estudios 
+        FROM pacientes 
+        WHERE dni = ?";
+
+if (!$stmt = $conn->prepare($sql)) {
+    echo json_encode(['success' => false, 'message' => 'Error de preparación: '.$conn->error]);
+    exit;
+}
+
+$stmt->bind_param("s", $dni);
+
+if (!$stmt->execute()) {
+    echo json_encode(['success' => false, 'message' => 'Error al ejecutar: '.$stmt->error]);
+    $stmt->close();
+    exit;
+}
+
+// ¡Sin get_result()! Compatibilidad con servidores sin mysqlnd
+$stmt->store_result();
+if ($stmt->num_rows === 0) {
+    echo json_encode(['success' => false, 'message' => 'Paciente no encontrado']);
+    $stmt->close();
+    exit;
+}
+
+$stmt->bind_result($id, $nombres, $apellido_paterno, $apellido_materno, $programa_estudios);
+$stmt->fetch();
+
+echo json_encode([
+    'success' => true,
+    'id' => $id,
+    'nombres' => $nombres,
+    'apellido_paterno' => $apellido_paterno,
+    'apellido_materno' => $apellido_materno,
+    'programa_estudios' => $programa_estudios
+]);
+
+$stmt->close();
+$conn->close();

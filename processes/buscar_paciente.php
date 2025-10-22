@@ -1,5 +1,16 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
+// Función para limpiar recursivamente a UTF-8
+function utf8ize($mixed) {
+    if (is_array($mixed)) {
+        foreach ($mixed as $k => $v) { $mixed[$k] = utf8ize($v); }
+        return $mixed;
+    } elseif (is_string($mixed)) {
+        // Convierte a UTF-8 solo si no lo es
+        return mb_convert_encoding($mixed, 'UTF-8', 'UTF-8, ISO-8859-1, ISO-8859-15, CP1252');
+    }
+    return $mixed;
+}
 
 include '../services/conexion.php'; // Debe crear $conn = new mysqli(...)
 

@@ -36,8 +36,6 @@ if (isset($_GET['dni'])) {
         // Si no se encuentra el paciente
         echo json_encode(['success' => false, 'message' => 'Paciente no encontrado']);
     }
-    echo json_encode(['success' => false, 'message' => 'no se ejecuto']);
-
     $stmt->close();
 } else {
     echo json_encode(['success' => false, 'message' => 'DNI no proporcionado']);

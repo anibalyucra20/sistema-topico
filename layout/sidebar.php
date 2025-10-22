@@ -82,16 +82,6 @@
 
                 <li><a href="../view/datos_empresa.php" class="waves-effect"><i class="fas fa-city"></i><span>Empresa</span></a></li>
             </ul>
-
-            <ul class="metismenu list-unstyled" id="side-menu">
-                <?php if ($_SESSION['cargo'] == 'Administrador'): ?>
-                    <div class="mt-3 mb-5">
-                        <a href="https://wa.me/51906829934?text=Hola,%20me%20interesa%20el%20sistema." target="_blank" class="btn btn-dark buynow-link w-100 px-2">
-                            Contactar al Desarrollador
-                        </a>
-                    </div>
-                <?php endif; ?>
-            </ul>
         </div>
     </div>
     <!-- Sidebar End -->

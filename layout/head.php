@@ -20,7 +20,7 @@ if (!isset($_SESSION['usuario'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/Logo_Sistopi.png">
+    <link rel="shortcut icon" href="../assets/images/Logo_Sistopi.jpg">
 
     <!-- Plugins css -->
     <link href="../plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />

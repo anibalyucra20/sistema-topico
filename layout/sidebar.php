@@ -4,7 +4,7 @@
 
         <div class="navbar-brand-box">
             <a href="../view/dashboard.php" class="logo">
-                <img width="50px" src="../assets/images/Logo_Sistopi.png" alt="LogoSistopi">
+                <img width="50px" src="../assets/images/Logo_Sistopi.jpg" alt="LogoSistopi">
                 <span>
                     SISTOPI
                 </span>

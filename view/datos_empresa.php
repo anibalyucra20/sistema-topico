@@ -44,7 +44,7 @@
                         <div class="col-sm-12">
                             <div class="card card-pricing">
                             <div class="card-body" style="text-align: center;">
-                                    <img src="../assets/images/Logo_Sistopi.png" alt="Logo" style="width: 6%;">
+                                    <img src="../assets/images/Logo_Sistopi.jpg" alt="Logo" style="width: 6%;">
                                     <h4 class="font-weight-bold mt-4 text-uppercase">DATOS DEL SISTEMA</h4>
                                     <p class="text-muted mt-3 mb-4" style="text-align: justify;">
                                         El Sistema de Tópico Institucional es una plataforma web diseñada para registrar y gestionar de forma

@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
+echo json_encode(['ok' => true, 'step' => 'A']);
 
 // DEBUG: logea errores a un archivo (asegúrate de crear la carpeta logs con permisos 755/775)
 ini_set('log_errors', 1);

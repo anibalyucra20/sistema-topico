@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="p-5">
                                         <div class="text-center mb-5">
                                             <a href="index.php" class="text-dark font-size-22 font-family-secondary">
-                                                <img width="60px" src="assets/images/Logo_Sistopi.png" alt="Logo_Sistopi"> <b>SISTOPI</b>
+                                                <img width="60px" src="assets/images/Logo_Sistopi.jpg" alt="Logo_Sistopi"> <b>SISTOPI</b>
                                             </a>
                                         </div>
                                         <h1 class="h5 mb-1">¡Bienvenido al sistema de tópico!</h1>
